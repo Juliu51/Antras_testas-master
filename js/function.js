@@ -6,6 +6,10 @@ let balance = document.querySelector('.balance');
 let NewAccount = [];
 let income_total = 0;
 let expense_total = 0;
+let minExpensesCount = Infinity;
+let minIncomeCount = Infinity;
+let maxIncomeCount = 0;
+let maxExpensesCount = 0;
 
 function getData(account, men) {
     if (Array.isArray(account)) {
@@ -21,11 +25,28 @@ function getData(account, men) {
             if (NewAccount[i].income == undefined) {
                 NewAccount[i].income = 0
             }
+                    if (NewAccount[i].income > maxIncomeCount && NewAccount[i].income !== 0)  {
+                        maxIncomeCount = NewAccount[i].income;            //<-- Be infinity neranda max/min dar galima naudoti Math.max/min 
+                        maxIncome.innerHTML = men[i];
+                           }
+                     if (NewAccount[i].income < minIncomeCount && NewAccount[i].income !== 0)  {
+                        minIncomeCount = NewAccount[i].income;
+                         minIncome.innerHTML = men[i];
+                         }
             if (NewAccount[i].expense == undefined) {
                 NewAccount[i].expense = 0
                  }
-                 income_total += NewAccount[i].income;
-                 expense_total += NewAccount[i].expense;
+                     if (NewAccount[i].expense > maxExpensesCount && NewAccount[i].expense !== 0)  {
+                        maxExpensesCount = NewAccount[i].expense;
+                        maxExpenses.innerHTML = men[i];
+                       }
+                    if (NewAccount[i].expense < minExpensesCount && NewAccount[i].expense !== 0) {
+                        minExpensesCount = NewAccount[i].expense;
+                        minExpenses.innerHTML = men[i];
+                        }
+            income_total += NewAccount[i].income;
+            expense_total += NewAccount[i].expense;
+
             HTML += `<div class="table-row">                                
     <div class="cell">${NewAccount[i].month}</div>
     <div class="cell">${men[i]}</div>
