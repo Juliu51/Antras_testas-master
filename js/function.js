@@ -4,6 +4,8 @@ let income = document.querySelector('.income');
 let expense = document.querySelector('.expense');
 let balance = document.querySelector('.balance');
 let NewAccount = [];
+let income_total = 0;
+let expense_total = 0;
 
 function getData(account, men) {
     if (Array.isArray(account)) {
@@ -22,7 +24,8 @@ function getData(account, men) {
             if (NewAccount[i].expense == undefined) {
                 NewAccount[i].expense = 0
                  }
-
+                 income_total += NewAccount[i].income;
+                 expense_total += NewAccount[i].expense;
             HTML += `<div class="table-row">                                
     <div class="cell">${NewAccount[i].month}</div>
     <div class="cell">${men[i]}</div>
@@ -31,7 +34,10 @@ function getData(account, men) {
     <div class="cell">${NewAccount[i].income - NewAccount[i].expense} Eur</div>
 </div>`;
         }
-        lentele.innerHTML = HTML; 
+        lentele.innerHTML = HTML;
+        income.innerHTML = income_total + ' EUR';
+        expense.innerHTML = expense_total + ' EUR';
+        balance.innerHTML = income_total - expense_total + ' EUR';
     }
 }
 
